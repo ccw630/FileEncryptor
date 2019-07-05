@@ -13,6 +13,8 @@ import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 
 public class Encryption {
+    static final String SEP =  File.separator;
+
     private File file;
     private String password;
 
@@ -38,7 +40,7 @@ public class Encryption {
 
         FileInputStream in = new FileInputStream(file);
         FileOutputStream out = preOutput(in, file.getParent() +
-                "/" + file.getName() + ".tmp", cipher);
+                SEP + file.getName() + ".tmp", cipher);
         byte[] output = cipher.doFinal();
         if (output != null) {
             out.write(output);
@@ -50,7 +52,7 @@ public class Encryption {
         out.write(iv);
         out.close();
 
-        File temp = new File(file.getParent() + "/" + file.getName() + ".tmp");
+        File temp = new File(file.getParent() + SEP + file.getName() + ".tmp");
         file.delete();
         return temp.renameTo(file);
     }
@@ -74,7 +76,7 @@ public class Encryption {
 
         FileInputStream in = new FileInputStream(file);
         FileOutputStream out = preOutput(in, file.getParent() +
-                "/" + file.getName() + ".tmp", cipher);
+                SEP + file.getName() + ".tmp", cipher);
 
         try {
             byte[] output = cipher.doFinal();
@@ -89,7 +91,7 @@ public class Encryption {
             raf.close();
             in.close();
             out.close();
-            File temp = new File(file.getParent() + "/" + file.getName() + ".tmp");
+            File temp = new File(file.getParent() + SEP + file.getName() + ".tmp");
             temp.delete();
             return false;
         }
@@ -99,7 +101,7 @@ public class Encryption {
         out.flush();
         out.close();
 
-        File temp = new File(file.getParent() + "/" + file.getName() + ".tmp");
+        File temp = new File(file.getParent() + SEP + file.getName() + ".tmp");
         file.delete();
         temp.renameTo(file);
         return true;

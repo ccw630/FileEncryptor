@@ -16,7 +16,7 @@ public class Main extends Application {
     static final String NOPASS = "口令不能为空\n ";
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
         FileChooser fc = new FileChooser();
         fc.setTitle("请选择文件");
 
